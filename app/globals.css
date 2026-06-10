@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* فونت تیتر Peyda (روی Google Fonts نیست) — از CDN رایگان بارگذاری می‌شود.
+   اگر CDN در دسترس نباشد، fallback به Vazirmatn Bold عمل می‌کند. */
+@font-face {
+  font-family: "Peyda";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/peyda-font@v4.0.0/dist/webfonts/PeydaWeb-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Peyda";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/peyda-font@v4.0.0/dist/webfonts/PeydaWeb-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-vazirmatn), "Peyda", Tahoma, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* عنوان‌ها با فونت Peyda */
+  .font-heading {
+    font-family: "Peyda", var(--font-vazirmatn), Tahoma, sans-serif;
+  }
+
+  /* اعداد و عبارات لاتین با Cormorant Garamond */
+  .font-latin {
+    font-family: var(--font-cormorant), Georgia, serif;
+  }
+}
