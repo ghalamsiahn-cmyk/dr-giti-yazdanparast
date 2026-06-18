@@ -46,18 +46,32 @@ export default function Hero() {
 
           <h1 className="text-cream mb-4">
 
-            {/* ── Mobile: Peyda Bold, two clean centered lines ── */}
-            <span className="block sm:hidden text-center">
+            {/* ── Mobile: IranNastaliq, two clean lines, RTL right-aligned ── */}
+            <span className="block sm:hidden">
               <span
-                className="block font-heading"
-                style={{ fontSize: "clamp(24px, 7vw, 32px)", lineHeight: 1.5, letterSpacing: "0.02em" }}
+                className="block font-hero"
+                style={{
+                  fontSize: "clamp(20px, 6vw, 28px)",
+                  lineHeight: 1.9,
+                  letterSpacing: 0,
+                  wordSpacing: "normal",
+                  fontKerning: "normal",
+                  textRendering: "optimizeLegibility",
+                }}
               >
                 {titleLine1}
               </span>
               {titleLine2 && (
                 <span
-                  className="block font-heading mt-1"
-                  style={{ fontSize: "clamp(24px, 7vw, 32px)", lineHeight: 1.5, letterSpacing: "0.02em" }}
+                  className="block font-hero"
+                  style={{
+                    fontSize: "clamp(20px, 6vw, 28px)",
+                    lineHeight: 1.9,
+                    letterSpacing: 0,
+                    wordSpacing: "normal",
+                    fontKerning: "normal",
+                    textRendering: "optimizeLegibility",
+                  }}
                 >
                   {titleLine2}
                 </span>
@@ -67,7 +81,15 @@ export default function Hero() {
             {/* ── Desktop: IranNastaliq, single line, RTL-start aligned ── */}
             <span
               className="hidden sm:block font-hero"
-              style={{ fontSize: "clamp(22px, 5.5vw, 72px)", lineHeight: 1.8, wordBreak: "keep-all" }}
+              style={{
+                fontSize: "clamp(22px, 5.5vw, 72px)",
+                lineHeight: 1.8,
+                letterSpacing: 0,
+                wordSpacing: "normal",
+                fontKerning: "normal",
+                textRendering: "optimizeLegibility",
+                wordBreak: "keep-all",
+              }}
             >
               {hero.title}
             </span>
