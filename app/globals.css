@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* فونت تیتر Peyda (روی Google Fonts نیست) — از CDN رایگان بارگذاری می‌شود.
-   اگر CDN در دسترس نباشد، fallback به Vazirmatn Bold عمل می‌کند. */
+/* ── IranNastaliq — فایل را در public/fonts/ قرار دهید ── */
+@font-face {
+  font-family: "IranNastaliq";
+  src: url("/fonts/IranNastaliq.woff2") format("woff2"),
+       url("/fonts/IranNastaliq.ttf")   format("truetype");
+  font-weight: normal;
+  font-style:  normal;
+  font-display: swap;
+}
+
+/* ── Peyda (نه در Google Fonts — از CDN بارگذاری می‌شود) ── */
 @font-face {
   font-family: "Peyda";
   src: url("https://cdn.jsdelivr.net/gh/rastikerdar/peyda-font@v4.0.0/dist/webfonts/PeydaWeb-Bold.woff2")
@@ -22,23 +31,63 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px;
   }
 
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-vazirmatn), "Peyda", Tahoma, sans-serif;
+  ::selection {
+    background-color: #c9a45c;
+    color: #2e2433;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid #c9a45c;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
+/* ── Scrollbar — desktop only ── */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #f7f3ee; }
+  ::-webkit-scrollbar-thumb { background: #8b6fa3; border-radius: 99px; }
+}
+
 @layer utilities {
-  /* عنوان‌ها با فونت Peyda */
   .font-heading {
     font-family: "Peyda", var(--font-vazirmatn), Tahoma, sans-serif;
   }
-
-  /* اعداد و عبارات لاتین با Cormorant Garamond */
   .font-latin {
     font-family: var(--font-cormorant), Georgia, serif;
   }
+  .font-display {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+
+  /* Hero entry animations */
+  .hero-a1 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+  .hero-a2 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+  .hero-a3 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+  .hero-a4 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+  .hero-a5 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+  .hero-a6 { animation: hero-fade 0.9s cubic-bezier(0.16,1,0.3,1) 0.85s both; }
+
+  /* Neumorphic soft card */
+  .card-soft {
+    box-shadow:
+      6px 6px 20px rgba(94, 58, 110, 0.07),
+      -4px -4px 14px rgba(255, 255, 255, 0.85);
+  }
+
+  /* Neumorphic inset */
+  .card-inset {
+    box-shadow:
+      inset 3px 3px 8px rgba(94, 58, 110, 0.1),
+      inset -3px -3px 8px rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Pause marquee on hover */
+.marquee-track:hover .marquee-content {
+  animation-play-state: paused;
 }

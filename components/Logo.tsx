@@ -8,7 +8,6 @@ import { useState } from "react";
 
 interface LogoProps {
   className?: string;
-  /** اگر true باشد، نسخه‌ی سفید (برای پس‌زمینه‌ی تیره) نمایش داده می‌شود */
   light?: boolean;
 }
 
@@ -22,6 +21,7 @@ export function Logo({ className = "h-10 w-10", light = false }: LogoProps) {
         src="/logo.png"
         alt="لوگوی دکتر گیتی یزدانپرست"
         className={`${className} object-contain`}
+        style={light ? { filter: "brightness(0) invert(1)" } : undefined}
         onError={() => setFailed(true)}
       />
     );
@@ -48,7 +48,7 @@ export function Logo({ className = "h-10 w-10", light = false }: LogoProps) {
         textAnchor="middle" dominantBaseline="central"
         fontFamily="Cormorant Garamond, Georgia, serif"
         fontSize="52" fontWeight="600"
-        fill={light ? "#F7F3EE" : "#F7F3EE"}
+        fill="#F7F3EE"
       >
         G
       </text>

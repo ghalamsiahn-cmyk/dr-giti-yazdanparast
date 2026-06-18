@@ -1,66 +1,99 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { site } from "@/content/site";
 import { Logo } from "./Logo";
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-soft/20 bg-cream/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-content items-center justify-between px-5 py-3">
-        <a href="#hero" className="flex items-center gap-2.5" aria-label={site.brand.name}>
-          {/* لوگو با پس‌زمینه‌ی سفید گرد در navbar */}
-          <div className="h-10 w-10 rounded-full overflow-hidden border border-gold/30 bg-white flex items-center justify-center shadow-sm flex-shrink-0">
-            <Logo className="h-9 w-9 object-contain" />
-          </div>
-          <span className="font-heading text-sm font-bold text-primary sm:text-base leading-tight">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-white ${
+        scrolled ? "shadow-sm" : "border-b border-gray-100"
+      }`}
+    >
+      <nav className="mx-auto max-w-content px-6 h-[72px] flex items-center justify-between">
+
+        {/* Logo + name */}
+        <a href="#" className="flex items-center gap-3 shrink-0">
+          <Logo className="h-9 w-9" />
+          <span className="text-[13px] font-heading font-bold text-primary tracking-wide leading-tight hidden sm:block">
             {site.brand.name}
           </span>
         </a>
 
-        {/* منوی دسکتاپ */}
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-8">
           {site.nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="text-sm font-medium text-darktext/80 transition-colors hover:text-gold"
-              >
-                {item.label}
-              </a>
-            </li>
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-[13px] font-sans text-darktext/65 hover:text-primary transition-colors duration-200"
+            >
+              {item.label}
+            </a>
           ))}
-        </ul>
+          <a
+            href="#contact"
+            className="text-[13px] font-sans font-medium px-5 py-2.5 rounded-lg bg-primary text-cream hover:bg-deep transition-all duration-200"
+          >
+            رزرو نوبت
+          </a>
+        </div>
 
-        {/* دکمه‌ی منوی موبایل */}
+        {/* Mobile hamburger */}
         <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-primary md:hidden"
-          aria-label="باز و بسته کردن منو"
-          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+          aria-label="منو"
+          className="md:hidden flex flex-col gap-[5px] p-2 text-darktext"
         >
-          <span className="text-2xl leading-none">{open ? "✕" : "☰"}</span>
+          <span
+            className={`block h-0.5 w-5 bg-current transition-transform duration-300 origin-center ${
+              open ? "translate-y-[7px] rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-5 bg-current transition-opacity duration-300 ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block h-0.5 w-5 bg-current transition-transform duration-300 origin-center ${
+              open ? "-translate-y-[7px] -rotate-45" : ""
+            }`}
+          />
         </button>
       </nav>
 
-      {/* منوی موبایل */}
+      {/* Mobile drawer */}
       {open && (
-        <ul className="flex flex-col gap-1 border-t border-soft/20 bg-cream px-5 py-3 md:hidden">
+        <div className="md:hidden px-6 py-5 flex flex-col gap-4 border-t border-gray-100 bg-white shadow-lg">
           {site.nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-2 text-sm font-medium text-darktext/80 transition-colors hover:bg-soft/10 hover:text-gold"
-              >
-                {item.label}
-              </a>
-            </li>
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="text-[14px] font-sans text-darktext/70 hover:text-primary transition-colors"
+            >
+              {item.label}
+            </a>
           ))}
-        </ul>
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="text-[14px] font-sans font-medium text-cream bg-primary px-4 py-3 rounded-lg text-center"
+          >
+            رزرو نوبت
+          </a>
+        </div>
       )}
     </header>
   );
