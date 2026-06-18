@@ -12,6 +12,16 @@
   font-display: swap;
 }
 
+/* ── Morabba Light — فایل را در public/fonts/Morabba-Light.woff2 قرار دهید ── */
+@font-face {
+  font-family: "Morabba";
+  src: url("/fonts/Morabba-Light.woff2") format("woff2"),
+       url("/fonts/Morabba-Light.ttf")   format("truetype");
+  font-weight: 300;
+  font-style:  normal;
+  font-display: swap;
+}
+
 /* ── Peyda (نه در Google Fonts — از CDN بارگذاری می‌شود) ── */
 @font-face {
   font-family: "Peyda";

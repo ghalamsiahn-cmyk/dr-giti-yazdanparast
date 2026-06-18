@@ -46,16 +46,14 @@ export default function Hero() {
 
           <h1 className="text-cream mb-4">
 
-            {/* ── Mobile: IranNastaliq, two clean lines, RTL right-aligned ── */}
+            {/* ── Mobile: Morabba Light, two clean lines, RTL right-aligned ── */}
             <span className="block sm:hidden">
               <span
-                className="block font-hero"
+                className="block font-morabba font-light"
                 style={{
-                  fontSize: "clamp(20px, 6vw, 28px)",
-                  lineHeight: 1.9,
-                  letterSpacing: 0,
-                  wordSpacing: "normal",
-                  fontKerning: "normal",
+                  fontSize: "clamp(22px, 6.5vw, 32px)",
+                  lineHeight: 1.6,
+                  letterSpacing: "-0.01em",
                   textRendering: "optimizeLegibility",
                 }}
               >
@@ -63,13 +61,11 @@ export default function Hero() {
               </span>
               {titleLine2 && (
                 <span
-                  className="block font-hero"
+                  className="block font-morabba font-light"
                   style={{
-                    fontSize: "clamp(20px, 6vw, 28px)",
-                    lineHeight: 1.9,
-                    letterSpacing: 0,
-                    wordSpacing: "normal",
-                    fontKerning: "normal",
+                    fontSize: "clamp(22px, 6.5vw, 32px)",
+                    lineHeight: 1.6,
+                    letterSpacing: "-0.01em",
                     textRendering: "optimizeLegibility",
                   }}
                 >

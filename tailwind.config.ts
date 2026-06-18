@@ -23,6 +23,7 @@ const config: Config = {
         latin:   ["var(--font-cormorant)", "Georgia", "serif"],
         display: ["var(--font-playfair)", "Georgia", "serif"],
         hero:    ["IranNastaliq", "var(--font-lalezar)", "var(--font-vazirmatn)", "Tahoma", "sans-serif"],
+        morabba: ["Morabba", "var(--font-vazirmatn)", "Tahoma", "sans-serif"],
       },
       maxWidth: {
         content: "1200px",
