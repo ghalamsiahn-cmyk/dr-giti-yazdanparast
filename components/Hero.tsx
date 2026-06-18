@@ -4,8 +4,8 @@ import { VideoBackground } from "@/components/ui/video-bg";
 export default function Hero() {
   const { hero } = site;
 
-  // Split title at last word boundary for controlled mobile line-break:
-  // "دکتر گیتی یزدانپرست" → line1 = "دکتر گیتی", line2 = "یزدانپرست"
+  // Split title at last space for controlled mobile line break:
+  // "دکتر گیتی یزدان‌پرست" → "دکتر گیتی" / "یزدان‌پرست"
   const lastSpace = hero.title.lastIndexOf(" ");
   const titleLine1 = lastSpace !== -1 ? hero.title.slice(0, lastSpace) : hero.title;
   const titleLine2 = lastSpace !== -1 ? hero.title.slice(lastSpace + 1) : "";
@@ -13,15 +13,16 @@ export default function Hero() {
   return (
     <section className="relative h-dvh w-full overflow-hidden">
 
-      {/* Background: local video clip looping seconds 2–10 */}
       <VideoBackground
         src="/clinic.mp4"
+        mobileSrc="/clinic-mobile.mp4"
         poster="/clinic-poster.jpg"
+        mobilePoster="/clinic-poster-mobile.jpg"
         startSeconds={2}
         endSeconds={10}
       />
 
-      {/* Fallback gradient — visible while video loads; poster replaces this immediately */}
+      {/* Fallback gradient — visible while poster/video loads */}
       <div
         className="absolute inset-0 -z-10"
         style={{
@@ -39,23 +40,40 @@ export default function Hero() {
         }}
       />
 
-      {/* Content — bottom-right (RTL start) */}
+      {/* Content */}
       <div className="absolute inset-x-0 bottom-14 z-10 px-8 sm:px-16 mx-auto max-w-content right-0 left-0">
         <div className="max-w-lg">
-          <h1
-            className="font-hero text-cream mb-4"
-            style={{
-              fontSize: "clamp(22px, 5.5vw, 72px)",
-              lineHeight: 1.8,
-              wordBreak: "keep-all",
-              overflowWrap: "normal",
-            }}
-          >
-            {/* On mobile: two clean lines. On sm+: single line (br hidden) */}
-            {titleLine1}
-            <br className="sm:hidden" />
-            {titleLine2 && <>{" "}{titleLine2}</>}
+
+          <h1 className="text-cream mb-4">
+
+            {/* ── Mobile: Peyda Bold, two clean centered lines ── */}
+            <span className="block sm:hidden text-center">
+              <span
+                className="block font-heading"
+                style={{ fontSize: "clamp(24px, 7vw, 32px)", lineHeight: 1.5, letterSpacing: "0.02em" }}
+              >
+                {titleLine1}
+              </span>
+              {titleLine2 && (
+                <span
+                  className="block font-heading mt-1"
+                  style={{ fontSize: "clamp(24px, 7vw, 32px)", lineHeight: 1.5, letterSpacing: "0.02em" }}
+                >
+                  {titleLine2}
+                </span>
+              )}
+            </span>
+
+            {/* ── Desktop: IranNastaliq, single line, RTL-start aligned ── */}
+            <span
+              className="hidden sm:block font-hero"
+              style={{ fontSize: "clamp(22px, 5.5vw, 72px)", lineHeight: 1.8, wordBreak: "keep-all" }}
+            >
+              {hero.title}
+            </span>
+
           </h1>
+
           <p className="text-[15px] sm:text-[17px] text-cream/70 font-sans mb-2 leading-relaxed">
             {hero.subtitle}
           </p>
